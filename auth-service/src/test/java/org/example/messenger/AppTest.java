@@ -1,4 +1,4 @@
-package org.example.messenger.messenger;
+package org.example.messenger;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
