@@ -1,22 +1,34 @@
 package org.example.messenger.service;
 
+import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
+import org.example.messenger.LoginRequest;
 import org.example.messenger.UserDto;
+import org.example.messenger.config.UserServiceWebClient;
+import org.example.messenger.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
-    @Autowired
-    private WebClient userServiceWebClient;
 
-    public UserDto register(UserDto userDto) {
-        return userServiceWebClient.post()
-                .uri("/register")
-                .bodyValue(userDto)
-                .retrieve()
-                .bodyToMono(UserDto.class)
-                .block();
+    private final UserServiceWebClient userServiceWebClient;
+
+    public UserDto authenticate(LoginRequest loginRequest){
+        return userServiceWebClient.authenticate(loginRequest.username());
 
     }
-}
+
+
+//    public void authenticate(LoginRequest loginRequest){
+//        UserDto userDto = userServiceClient.findByUsername(loginRequest.username());
+//        if(userDto==null){
+//            throw new UserNotFoundException("User not found: " + loginRequest.username());
+//        }
+
+
+    }
+
+
+

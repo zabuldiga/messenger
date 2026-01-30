@@ -1,24 +1,34 @@
 package org.example.messenger.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.example.messenger.LoginRequest;
 import org.example.messenger.UserDto;
 import org.example.messenger.entity.User;
 import org.example.messenger.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("users/")
+@RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-    @PostMapping("/register")
-    public UserDto register(UserDto userDto) {
-        System.out.println("от authservice пришел запрос от : " + userDto.getUsername());
-        User user = User.builder().username(userDto.getUsername()).password(userDto.getPassword()).build();
-        return userService.register(user);
+    private final UserService userService;
+
+
+    @GetMapping("/{username}")
+    public UserDto getUser(@PathVariable String username){
+        return userService.getUser(username);
 
     }
+
+//    @Autowired
+//    private UserService userService;
+//    @PostMapping("/register")
+//    public LoginRequest register(LoginRequest loginRequest) {
+//        System.out.println("от authservice пришел запрос от : " + loginRequest.getUsername());
+//        User user = User.builder().username(loginRequest.getUsername()).password(loginRequest.getPassword()).build();
+//        return userService.register(user);
+//
+//    }
 }

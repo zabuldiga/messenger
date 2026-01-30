@@ -2,11 +2,16 @@ server:
   port: 8082
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/messengerdb
-    driverClassName: org.postgresql.Driver
-    username: postgres
-    password: admin
+    url: jdbc:postgresql://localhost:5432/messenger_users
+    username: messenger_admin
+    password: admin_pass
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: update # Hibernate сам подправит таблицы, если ты изменишь Entity
+    show-sql: true # Будешь видеть в консоли Idea, какие запросы улетают в базу
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
