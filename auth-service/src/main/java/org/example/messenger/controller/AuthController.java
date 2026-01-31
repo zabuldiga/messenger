@@ -6,6 +6,10 @@ import org.example.messenger.UserDto;
 import org.example.messenger.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,20 +24,21 @@ import java.util.Map;
 public class AuthController {
 
     private final AuthService authService;
-
+    private final AuthenticationManager authenticationManager;
 
     @PostMapping("login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest) {
+             Authentication authentication =  authenticationManager.authenticate(
+                     new UsernamePasswordAuthenticationToken(
+                             loginRequest.username(),
+                             loginRequest.password()
 
-        UserDto userDto = authService.authenticate(loginRequest);
+                     )
+
+             );
 
 
-        if (userDto != null) {
-            return ResponseEntity.ok(Map.of("message", "Authentication successful"));
-        } else {
-            return ResponseEntity.status(401).body(Map.of("message", "Invalid credentials"));
-        }
-
+        return ResponseEntity.ok(Map.of("message", "Authentication successful"));
     }
 
 //    @PostMapping("register")
