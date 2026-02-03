@@ -22,37 +22,3 @@ public class JwtTokenUtil {
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
-
-    public String generationToken(String username) {
-        Date issuedDate = new Date();
-        Date expiredDate = new Date(issuedDate.getTime() + jwtLifetime.toMillis());
-
-        return Jwts.builder()
-                .subject(username)
-                .issuedAt(issuedDate)
-                .expiration(expiredDate)
-                .signWith(getSigningKey())
-                .compact();
-    }
-
-    public String extractUsername(String token) {
-        return extractAllClaims(token).getSubject();
-    }
-
-    public boolean validateToken(String token, String username) {
-        final String tokenUsername = extractUsername(token);
-        return (username.equals(tokenUsername) && !isTokenExpired(token));
-    }
-
-    private boolean isTokenExpired(String token) {
-        return extractAllClaims(token).getExpiration().before(new Date());
-    }
-
-    private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(getSigningKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
-    }
-}
