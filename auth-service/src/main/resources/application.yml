@@ -2,4 +2,8 @@ server:
   port: 8081
 user-service:
   url: http://localhost:8082/api/v1/users
+jwt:
+  secret: 2y8duqie8fjrk4i8ssifj339difjei8s
+  lifetime: 30m
+
 
