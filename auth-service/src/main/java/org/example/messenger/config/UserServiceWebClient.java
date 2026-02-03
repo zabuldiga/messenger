@@ -15,7 +15,7 @@ public class UserServiceWebClient {
     }
 
 
-    public UserDto authenticate(String username){
+    public UserDto getUser(String username){
 
         return this.webClient
                 .get()

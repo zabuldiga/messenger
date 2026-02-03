@@ -10,6 +10,7 @@ public class UserMapping {
     public UserDto entityToDto(User user) {
         return UserDto.builder()
                 .username(user.getUsername())
+                .password(user.getPassword())
                 .build();
 
     }
