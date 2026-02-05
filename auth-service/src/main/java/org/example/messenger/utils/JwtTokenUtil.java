@@ -19,6 +19,41 @@ public class JwtTokenUtil {
     @Value("${jwt.lifetime}")
     private Duration jwtLifetime;
 
+    // Создаем безопасный ключ из строки
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
+
+    public String generationToken(String username) {
+        Date issuedDate = new Date();
+        Date expiredDate = new Date(issuedDate.getTime() + jwtLifetime.toMillis());
+
+        return Jwts.builder()
+                .subject(username)
+                .issuedAt(issuedDate)
+                .expiration(expiredDate)
+                .signWith(getSigningKey())
+                .compact();
+    }
+
+    public String extractUsername(String token) {
+        return extractAllClaims(token).getSubject();
+    }
+
+    public boolean validateToken(String token, String username) {
+        final String tokenUsername = extractUsername(token); // Исправил: передаем token, а не username
+        return (username.equals(tokenUsername) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token) {
+        return extractAllClaims(token).getExpiration().before(new Date());
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(getSigningKey()) // Замена setSigningKey
+                .build()
+                .parseSignedClaims(token)     // Замена parseClaimsJws
+                .getPayload();               // Замена getBody()
+    }
+}
