@@ -42,7 +42,7 @@ public class JwtUtil {
         Assertions.assertEquals(name, jwtTokenUtil.extractUsername(token));
     }
 
-    // истекший срок годности токена
+    // тест истекшего срок годности токена
     @Test
     public void expiredToken() {
         ReflectionTestUtils.setField(jwtTokenUtil, "jwtLifetime", Duration.ofMillis(-1000));
