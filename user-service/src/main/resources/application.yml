@@ -7,10 +7,18 @@ spring:
     password: admin_pass
     driver-class-name: org.postgresql.Driver
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    template:
+      reply-timeout: 5000
+
   jpa:
     hibernate:
-      ddl-auto: update # Hibernate сам подправит таблицы, если ты изменишь Entity
-    show-sql: true # Будешь видеть в консоли Idea, какие запросы улетают в базу
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
