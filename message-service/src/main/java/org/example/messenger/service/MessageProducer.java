@@ -17,7 +17,7 @@ public class MessageProducer {
     private final RabbitTemplate rabbitTemplate;
 
     public void sendMessage(MessageDto messageDto) {
-        log.info("📤 Отправка сообщения в RabbitMQ: от userId={} к userId={}",
+        log.info("Отправка сообщения в RabbitMQ: от userId={} к userId={}",
                 messageDto.getSenderId(), messageDto.getReceiverId());
 
         rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, messageDto);

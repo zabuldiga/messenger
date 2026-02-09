@@ -16,7 +16,7 @@ public class MessageConsumer {
     private final MessageService messageService;
     @RabbitListener(queues = QUEUE)
     public void receiveMessage(MessageDto messageDto) {
-        log.info("📥 Получено сообщение из RabbitMQ:");
+        log.info("Получено сообщение из RabbitMQ:");
 
         messageService.processMessage(messageDto);
 
