@@ -1,4 +1,4 @@
-package org.example.messenger.utils;
+package org.example.messenger;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -51,9 +51,9 @@ public class JwtTokenUtil {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
-                .verifyWith(getSigningKey()) // Замена setSigningKey
+                .verifyWith(getSigningKey())
                 .build()
-                .parseSignedClaims(token)     // Замена parseClaimsJws
-                .getPayload();               // Замена getBody()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 }

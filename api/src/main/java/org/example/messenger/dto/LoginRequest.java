@@ -1,4 +1,4 @@
-package org.example.messenger;
+package org.example.messenger.dto;
 
 
 

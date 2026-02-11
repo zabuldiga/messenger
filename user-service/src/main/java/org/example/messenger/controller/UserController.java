@@ -1,11 +1,8 @@
 package org.example.messenger.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.messenger.LoginRequest;
-import org.example.messenger.UserDto;
-import org.example.messenger.entity.User;
+import org.example.messenger.dto.UserDto;
 import org.example.messenger.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

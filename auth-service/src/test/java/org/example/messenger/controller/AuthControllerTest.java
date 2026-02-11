@@ -1,11 +1,12 @@
 package org.example.messenger.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.messenger.LoginRequest;
-import org.example.messenger.UserDto;
+import org.example.messenger.dto.LoginRequest;
+import org.example.messenger.dto.UserDto;
 import org.example.messenger.service.AuthService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -19,6 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AuthController.class)
+@AutoConfigureMockMvc(addFilters = false)
+
 public class AuthControllerTest {
 
     @Autowired

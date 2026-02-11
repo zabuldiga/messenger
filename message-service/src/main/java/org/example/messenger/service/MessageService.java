@@ -2,8 +2,8 @@ package org.example.messenger.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.messenger.MessageDto;
-import org.example.messenger.MessageStatus;
+import org.example.messenger.dto.MessageDto;
+import org.example.messenger.dto.MessageStatus;
 import org.example.messenger.converter.messageMapper;
 import org.example.messenger.entity.Message;
 import org.example.messenger.repository.MessageRepository;
@@ -75,6 +75,29 @@ public class MessageService {
         return messages.stream()
                 .map(messageMapper::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+
+    public void sendPendingMessage(Long userId) {
+        log.info("Отправка накопившихся сообщений для userId={}", userId);
+        List<MessageDto> pending = getUnreadMessage(userId);
+
+        if (pending.isEmpty()) {
+            log.info("Непрочитанных сообщений нет");
+            return;
+        }
+
+        log.info("Найдено {} непрочитанных сообщений", pending.size());
+        pending.forEach(msg -> {
+                    webSocketService.sendMessageToUser(userId, msg);
+                    Message message = messageRepository.findById(msg.getId()).orElse(null);
+                    if (message != null) {
+                        message.setStatus(MessageStatus.DELIVERED);
+                        messageRepository.save(message);
+                    }
+                }
+        );
+        log.info("Все непрочитанные сообщения отправлены");
 
     }
 }
