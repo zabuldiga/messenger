@@ -20,6 +20,10 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User not found " + username));
     }
 
+    public Long getIdByUsername(String username) {
+        return userRepository.findIdByUsername(username);
+    }
+
 //    public LoginRequest register(User user) {
 //        return userConverter.entityToDto(userRepository.save(user));
 //

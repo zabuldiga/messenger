@@ -2,7 +2,7 @@ package org.example.messenger.service;
 
 import org.example.messenger.dto.LoginRequest;
 import org.example.messenger.dto.UserDto;
-import org.example.messenger.config.UserServiceWebClient;
+import org.example.messenger.integration.UserServiceWebClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

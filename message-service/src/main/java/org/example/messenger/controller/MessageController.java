@@ -3,9 +3,11 @@ package org.example.messenger.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.messenger.dto.MessageDto;
+import org.example.messenger.integration.UserServiceWebClient;
 import org.example.messenger.service.MessageProducer;
 import org.example.messenger.service.MessageService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,15 +21,22 @@ public class MessageController {
     private final MessageProducer messageProducer;
     private final MessageService messageService;
 
+    private final UserServiceWebClient userServiceWebClient;
+
 
     @PostMapping("/send")
-    public ResponseEntity<String> sendMessage(@RequestParam Long senderId,
-                                              @RequestParam Long receiverId,
-                                              @RequestParam String content) {
+    public ResponseEntity<String> sendMessage(@RequestParam Long receiverId,
+                                              @RequestParam String content,
+                                              Authentication authentication) {
 
-        log.info("🎯 Controller: запрос на отправку сообщения");
+        String username = (String) authentication.getPrincipal();
 
-        messageService.sendMessage(senderId, receiverId, content);
+        Long senderId = userServiceWebClient.getUserIdByUsername(username);
+        if(senderId==null){
+            return ResponseEntity.badRequest().body("Не удалось определить senderId по username=" + username);
+        }
+
+           messageService.sendMessage(senderId,receiverId,content);
 
         return ResponseEntity.ok("Сообщение отправлено");
 

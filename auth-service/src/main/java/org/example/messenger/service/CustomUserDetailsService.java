@@ -1,7 +1,7 @@
 package org.example.messenger.service;
 
 import org.example.messenger.dto.UserDto;
-import org.example.messenger.config.UserServiceWebClient;
+import org.example.messenger.integration.UserServiceWebClient;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
