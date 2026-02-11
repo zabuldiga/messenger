@@ -1,4 +1,4 @@
-package org.example.messenger.config;
+package org.example.messenger.integration;
 
 import org.example.messenger.dto.UserDto;
 import org.springframework.beans.factory.annotation.Value;
