@@ -1,6 +1,6 @@
 package org.example.messenger.repository;
 
-import org.example.messenger.MessageStatus;
+import org.example.messenger.dto.MessageStatus;
 import org.example.messenger.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

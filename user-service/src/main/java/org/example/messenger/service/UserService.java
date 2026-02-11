@@ -1,6 +1,6 @@
 package org.example.messenger.service;
 
-import org.example.messenger.UserDto;
+import org.example.messenger.dto.UserDto;
 import org.example.messenger.exception.UserNotFoundException;
 import org.example.messenger.mapping.UserMapping;
 import org.example.messenger.repository.UserRepository;

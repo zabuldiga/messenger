@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.messenger.MessageStatus;
+import org.example.messenger.dto.MessageStatus;
 
 import java.time.LocalDateTime;
 

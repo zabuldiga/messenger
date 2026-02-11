@@ -1,8 +1,8 @@
 package org.example.messenger.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.messenger.LoginRequest;
-import org.example.messenger.UserDto;
+import org.example.messenger.dto.LoginRequest;
+import org.example.messenger.dto.UserDto;
 import org.example.messenger.config.UserServiceWebClient;
 import org.springframework.stereotype.Service;
 

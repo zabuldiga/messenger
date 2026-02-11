@@ -2,14 +2,12 @@ package org.example.messenger.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.messenger.MessageDto;
-import org.example.messenger.MessageStatus;
+import org.example.messenger.dto.MessageDto;
 import org.example.messenger.service.MessageProducer;
 import org.example.messenger.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController

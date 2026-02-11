@@ -1,6 +1,6 @@
 package org.example.messenger.converter;
 
-import org.example.messenger.MessageDto;
+import org.example.messenger.dto.MessageDto;
 import org.example.messenger.entity.Message;
 import org.springframework.stereotype.Component;
 

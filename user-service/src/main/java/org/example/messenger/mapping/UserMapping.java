@@ -1,6 +1,6 @@
 package org.example.messenger.mapping;
 
-import org.example.messenger.UserDto;
+import org.example.messenger.dto.UserDto;
 import org.example.messenger.entity.User;
 import org.springframework.stereotype.Component;
 
